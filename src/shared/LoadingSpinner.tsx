@@ -46,7 +46,7 @@ const Loader = styled.img`
 export function LoadingSpinner() {
     return (
         <Container>
-            <Loader src="/src/spinner.svg" width={'24px'} alt="로딩중" />
+            <Loader src="/images/spinner.svg" width={'24px'} alt="로딩중" />
         </Container>
     )
 }

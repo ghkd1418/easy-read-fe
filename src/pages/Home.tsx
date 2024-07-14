@@ -66,7 +66,7 @@ export default function Home() {
                         <>
                             <StyledOutputTextArea ref={htmlRef} value={output} readOnly />
                             <CopyButton onClick={handleCopy}>
-                                <img src="src/copy.svg" alt="복사하기" />
+                                <img src="/images/copy.svg" alt="복사하기" />
                             </CopyButton>
                         </>
                     )}
