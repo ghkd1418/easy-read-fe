@@ -2,7 +2,7 @@ import {useRef} from 'react'
 import toast from 'react-hot-toast'
 
 export default function useCopy() {
-    const htmlRef = useRef<HTMLElement | null>(null)
+    const htmlRef = useRef<HTMLTextAreaElement | null>(null)
 
     const handleCopy = () => {
         if (htmlRef.current) {

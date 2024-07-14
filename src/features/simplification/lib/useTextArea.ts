@@ -12,9 +12,9 @@ export const useTextArea = () => {
     }
 
     const getGptAnswer = async (text: string) => {
-        const data = await customAxios.get('/gpt', {
+        const data = await customAxios.get('/karlo', {
             params: {
-                text,
+                keyword: text,
             },
         })
         setIsLoading(false)
@@ -27,10 +27,10 @@ export const useTextArea = () => {
             return
         }
         // setIsLoading(true)
-        // getGptAnswer(input)
-        setOutput(
-            'setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)',
-        )
+        getGptAnswer(input)
+        // setOutput(
+        //     'setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)',
+        // )
         // translateTextStream(input, (chunk: string) => {
         // setOutput((prev) => prev + chunk)
         // setIsLoading(false)
