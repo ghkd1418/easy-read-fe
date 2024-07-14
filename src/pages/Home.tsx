@@ -3,7 +3,6 @@ import {useTextArea} from '../features/simplification/lib/useTextArea.ts'
 import {Button} from '../features/simplification/ui/Button.tsx'
 import styled from 'styled-components'
 import useCopy from '../shared/useCopy.ts'
-import useDynamicFontSize from 'features/simplification/lib/useDynamicFontSize.ts'
 import {LoadingSpinner} from 'shared/LoadingSpinner.tsx'
 import {useState} from 'react'
 import {useFile} from 'features/simplification/lib/useFile.ts'
@@ -11,7 +10,6 @@ import {useFile} from 'features/simplification/lib/useFile.ts'
 export default function Home() {
     const {input, output, handleInputChange, handleSubmit, isLoading, handleKeyDown} = useTextArea()
     const {htmlRef, handleCopy} = useCopy()
-    const fontSize = useDynamicFontSize(input.length)
     const [mode, setMode] = useState<'file' | 'text'>('text')
 
     const {files, handleChange, handleDelete} = useFile()
@@ -38,7 +36,6 @@ export default function Home() {
                             placeholder={
                                 '읽고싶은 글이나 문장을 이곳에 써주세요.\n' + '복사한 글을 이곳에 ‘붙여넣기’ 해보세요.'
                             }
-                            $fontSize={fontSize}
                             spellCheck={false}
                         />
                     ) : (
@@ -114,14 +111,13 @@ const OutTextAreaWrapper = styled.div`
     border-radius: 12px;
 `
 
-const StyledTextArea = styled(TextArea)<{$fontSize?: string}>`
+const StyledTextArea = styled(TextArea)`
     border-radius: 12px;
     resize: none;
     height: 200px;
     width: 100%;
     background-color: white;
     outline: none;
-    font-size: ${({$fontSize}) => $fontSize};
     padding: 20px;
     border: 1px solid #a8a8a8;
 
@@ -161,6 +157,5 @@ const FileInputContainer = styled.div`
     height: 120px;
     width: 100%;
     background-color: #f5f5f5;
-    font-size: ${({$fontSize}) => $fontSize};
     padding: 20px;
 `
