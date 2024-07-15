@@ -29,7 +29,9 @@ export default function SimplificationFile() {
                                 </li>
                             ))}
                     </FileInputContainer>
-                    <Button onClick={handleSubmit}>직접 글 쓰기</Button>
+                    <Button size={'md'} onClick={handleSubmit}>
+                        직접 글 쓰기
+                    </Button>
                 </TextAreaWrapper>
                 <OutTextAreaWrapper>
                     {isLoading ? (

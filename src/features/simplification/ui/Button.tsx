@@ -3,17 +3,30 @@ import styled from 'styled-components'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode
-    onClick: () => void
+    onClick?: () => void
+    size: 'sm' | 'md' | 'lg'
 }
 
-export const Button = ({onClick, children}: ButtonProps) => <Container onClick={onClick}>{children}</Container>
+export const Button = ({onClick, children, size}: ButtonProps) => (
+    <Container onClick={onClick} size={size}>
+        {children}
+    </Container>
+)
 
-const Container = styled.button`
-    position: absolute;
-    right: 0;
-    bottom: 0;
+const Container = styled.button<{size: 'sm' | 'md' | 'lg'}>`
     width: 100%;
-    height: 80px;
+    height: ${({size}) => {
+        switch (size) {
+            case 'sm':
+                return '40px'
+            case 'md':
+                return '60px'
+            case 'lg':
+                return '83px'
+            default:
+                return '83px'
+        }
+    }};
     background-color: ${({theme}) => theme.colors.primary};
     font-size: ${({theme}) => theme.fontSize.lg};
     border-radius: 12px;

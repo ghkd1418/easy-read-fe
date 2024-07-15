@@ -1,28 +1,36 @@
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
+import {Button} from 'features/simplification/ui/Button.tsx'
 
 export default function Home() {
     return (
-        <div>
-            <h1>Home</h1>
-            <p>Welcome to the home page!</p>
+        <Container>
+            <Title>글 맞추기</Title>
 
             <LinkContainer>
-                <LinkWrapper>
-                    <StyledLink to={'/simplification/file'}>
-                        <img src="/images/upload.svg" alt="" />글 파일 올리기
-                    </StyledLink>
-                </LinkWrapper>
-                <LinkWrapper>
-                    <StyledLink to={'/simplification/text'}>
-                        <img src="/images/edit.svg" alt="" />
-                        직접 글 쓰기
-                    </StyledLink>
-                </LinkWrapper>
+                <StyledButton size={'lg'}>
+                    <img src="/images/upload.svg" alt="" />
+                    <StyledLink to={'/simplification/file'}>글 파일 올리기</StyledLink>
+                </StyledButton>
+                <StyledButton size={'lg'}>
+                    <img src="/images/edit.svg" alt="" />
+                    <StyledLink to={'/simplification/text'}>직접 글 쓰기</StyledLink>
+                </StyledButton>
             </LinkContainer>
-        </div>
+        </Container>
     )
 }
+
+const Container = styled.div`
+    padding: 10% 6%;
+`
+
+const Title = styled.h1`
+    margin-bottom: 5%;
+    font-weight: 800;
+    font-size: 64px;
+    text-align: center;
+`
 
 const LinkContainer = styled.div`
     display: flex;
@@ -31,8 +39,10 @@ const LinkContainer = styled.div`
     gap: 20px;
 `
 
-const LinkWrapper = styled.div`
-    width: 360px;
+const StyledButton = styled(Button)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 const StyledLink = styled(Link)`

@@ -4,12 +4,10 @@ import {Button} from '../features/simplification/ui/Button.tsx'
 import styled from 'styled-components'
 import useCopy from '../shared/useCopy.ts'
 import {LoadingSpinner} from 'shared/LoadingSpinner.tsx'
-import {useFile} from 'features/simplification/lib/useFile.ts'
 
 export default function SimplificationText() {
     const {input, output, handleInputChange, handleSubmit, isLoading, handleKeyDown} = useTextArea()
     const {htmlRef, handleCopy} = useCopy()
-    const {files, handleChange, handleDelete} = useFile()
 
     return (
         <Container>
@@ -27,7 +25,9 @@ export default function SimplificationText() {
                         }
                         spellCheck={false}
                     />
-                    <Button onClick={handleSubmit}>직접 글 쓰기</Button>
+                    <Button size={'md'} onClick={handleSubmit}>
+                        직접 글 쓰기
+                    </Button>
                 </TextAreaWrapper>
                 <OutTextAreaWrapper>
                     {isLoading ? (
@@ -49,20 +49,20 @@ export default function SimplificationText() {
 }
 
 const Container = styled.div`
-    padding: 10% 6%;
+    padding: 6% 6%;
 `
 
 const Title = styled.h1`
     margin-bottom: 5%;
     font-weight: 800;
-    font-size: 64px;
+    font-size: 44px;
     text-align: center;
 `
 
 const TextAreaContainer = styled.section`
     display: flex;
     gap: 10%;
-    height: 300px;
+    height: 100%;
 
     flex-wrap: wrap;
     position: relative;
@@ -86,12 +86,13 @@ const OutTextAreaWrapper = styled.div`
 const StyledTextArea = styled(TextArea)`
     border-radius: 12px;
     resize: none;
-    height: 200px;
+    height: 170px;
     width: 100%;
     background-color: white;
     outline: none;
     padding: 20px;
     border: 1px solid #a8a8a8;
+    gap: 10%;
 
     scrollbar-width: none;
 
