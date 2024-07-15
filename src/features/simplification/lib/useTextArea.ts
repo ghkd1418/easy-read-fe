@@ -1,6 +1,5 @@
 import {ChangeEvent, useState} from 'react'
 import toast from 'react-hot-toast'
-import customAxios from 'shared/customAxios.ts'
 
 export const useTextArea = () => {
     const [input, setInput] = useState('')
@@ -12,13 +11,41 @@ export const useTextArea = () => {
     }
 
     const getGptAnswer = async (text: string) => {
-        const data = await customAxios.get('/karlo', {
-            params: {
-                keyword: text,
-            },
-        })
-        setIsLoading(false)
-        setOutput(data.data)
+        const eventSource = new EventSource(
+            `http://ec2-54-180-248-249.ap-northeast-2.compute.amazonaws.com:8080/gpt/stream?text=${encodeURIComponent(text)}`,
+        )
+
+        eventSource.onmessage = (event) => {
+            try {
+                const parsedData = JSON.parse(event.data)
+                const messageContent = parsedData.choices[0]?.delta?.content || ''
+                const finishReason = parsedData.choices[0]?.finish_reason
+
+                // messageContent 가 있으면 loading(true)로 설정
+                if (messageContent) {
+                    setIsLoading(false)
+                }
+
+                if (finishReason === 'stop') {
+                    eventSource.close()
+                    return
+                }
+
+                setOutput((prevOutput) => prevOutput + messageContent)
+            } catch (error) {
+                console.error('Error parsing message:', error)
+            }
+        }
+
+        eventSource.onerror = (error) => {
+            console.error('EventSource failed:', error)
+            eventSource.close()
+            setIsLoading(false) // 에러 발생 시 로딩 상태를 false로 설정
+        }
+
+        return () => {
+            eventSource.close()
+        }
     }
 
     const handleSubmit = () => {
@@ -26,15 +53,8 @@ export const useTextArea = () => {
             toast.error('바꾸고 싶은 글을 입력해주세요.')
             return
         }
-        // setIsLoading(true)
+        setIsLoading(true)
         getGptAnswer(input)
-        // setOutput(
-        //     'setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)setOutput(data.data)',
-        // )
-        // translateTextStream(input, (chunk: string) => {
-        // setOutput((prev) => prev + chunk)
-        // setIsLoading(false)
-        // })
     }
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
