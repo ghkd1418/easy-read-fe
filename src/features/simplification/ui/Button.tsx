@@ -32,5 +32,14 @@ const Container = styled.button<{size: 'sm' | 'md' | 'lg'}>`
     border-radius: 12px;
 
     font-family: 'Pretendard', sans-serif;
-    font-weight: 700;
+    font-weight: 500;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    &:hover {
+        opacity: 0.9;
+    }
 `

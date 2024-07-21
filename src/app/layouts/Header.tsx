@@ -1,12 +1,26 @@
 import {Outlet} from 'react-router-dom'
 import styled from 'styled-components'
+import TabBar from 'app/layouts/TabBar.tsx'
 
-function Header() {
+interface HeaderProps {
+    logoSrc: string
+    title?: string
+    subtitle?: string
+}
+
+function Header({logoSrc, title, subtitle}: HeaderProps) {
     return (
         <>
-            <header>
-                <Nav>Logo</Nav>
-            </header>
+            <Container>
+                <Wrapper>
+                    <LogoImg src={logoSrc} alt="logo" />
+                    <TitleWrapper>
+                        <Title>{title}</Title>
+                        <SubTitle>{subtitle}</SubTitle>
+                    </TitleWrapper>
+                </Wrapper>
+            </Container>
+            <TabBar />
             <Outlet />
         </>
     )
@@ -14,6 +28,31 @@ function Header() {
 
 export default Header
 
-const Nav = styled.nav`
-    display: inline;
+const Container = styled.header`
+    background-color: #ffede7;
+`
+
+const Wrapper = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 5%;
+    height: 124px;
+    padding-left: 5%;
+`
+
+const LogoImg = styled.img`
+    width: 88px;
+    height: 72px;
+`
+
+const TitleWrapper = styled.div``
+
+const Title = styled.h1`
+    margin-bottom: 5%;
+    font-weight: 700;
+    font-size: 30px;
+`
+
+const SubTitle = styled.h2`
+    font-size: 20px;
 `

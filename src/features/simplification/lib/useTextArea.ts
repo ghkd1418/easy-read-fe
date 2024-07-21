@@ -12,7 +12,7 @@ export const useTextArea = () => {
 
     const getGptAnswer = async (text: string) => {
         const eventSource = new EventSource(
-            `http://ec2-54-180-248-249.ap-northeast-2.compute.amazonaws.com:8080/gpt/stream?text=${encodeURIComponent(text)}`,
+            `${import.meta.env.VITE_API_HOST}/gpt/stream?text=${encodeURIComponent(text)}`,
         )
 
         eventSource.onmessage = (event) => {

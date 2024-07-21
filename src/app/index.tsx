@@ -5,6 +5,7 @@ import {Toaster} from 'react-hot-toast'
 import {ThemeProvider} from 'styled-components'
 import theme from 'shared/theme.ts'
 import GlobalStyle from 'shared/globalStyles.ts'
+import '../reset.css'
 
 function App() {
     return (

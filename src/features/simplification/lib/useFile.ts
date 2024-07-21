@@ -1,9 +1,12 @@
 import {useState} from 'react'
+import {useNavigate} from 'react-router'
 
 export const useFile = () => {
     const [files, setFiles] = useState<File[]>([])
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading] = useState(false)
     const [output] = useState('')
+
+    const navigate = useNavigate()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFiles(Array.from(e.target.files || []))
@@ -14,7 +17,9 @@ export const useFile = () => {
     }
 
     const handleSubmit = () => {
-        setIsLoading(true)
+        // setIsLoading(true)
+        navigate('/view')
+
         console.log('submit')
     }
 

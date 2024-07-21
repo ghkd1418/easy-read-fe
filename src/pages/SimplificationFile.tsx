@@ -11,7 +11,6 @@ export default function SimplificationFile() {
 
     return (
         <Container>
-            <Title>글 맞추기</Title>
             <TextAreaContainer>
                 <TextAreaWrapper>
                     <FileInputContainer>
@@ -30,7 +29,7 @@ export default function SimplificationFile() {
                             ))}
                     </FileInputContainer>
                     <Button size={'md'} onClick={handleSubmit}>
-                        직접 글 쓰기
+                        변환하기
                     </Button>
                 </TextAreaWrapper>
                 <OutTextAreaWrapper>
@@ -53,20 +52,15 @@ export default function SimplificationFile() {
 }
 
 const Container = styled.div`
-    padding: 10% 6%;
-`
-
-const Title = styled.h1`
-    margin-bottom: 5%;
-    font-weight: 800;
-    font-size: 64px;
-    text-align: center;
+    padding: 6% 6%;
+    border: 5px solid #f3f3f3;
+    height: 406px;
 `
 
 const TextAreaContainer = styled.section`
     display: flex;
     gap: 10%;
-    height: 300px;
+    height: 100%;
 
     flex-wrap: wrap;
     position: relative;
@@ -74,9 +68,10 @@ const TextAreaContainer = styled.section`
 
 const TextAreaWrapper = styled.div`
     position: relative;
-    flex: 1;
-
-    width: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 `
 
 const OutTextAreaWrapper = styled.div`
@@ -90,7 +85,7 @@ const OutTextAreaWrapper = styled.div`
 const StyledTextArea = styled(TextArea)`
     border-radius: 12px;
     resize: none;
-    height: 200px;
+    height: 100%;
     width: 100%;
     background-color: white;
     outline: none;
@@ -130,9 +125,18 @@ const LoadingContainer = styled.div`
 
 const FileInputContainer = styled.div`
     border-radius: 12px;
-    resize: none;
-    height: 120px;
+    height: 100%;
     width: 100%;
     background-color: #f5f5f5;
     padding: 20px;
+
+    flex: 1;
+
+    outline: none;
+    gap: 10%;
+
+    scrollbar-width: none;
+
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
 `

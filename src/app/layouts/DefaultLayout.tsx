@@ -10,7 +10,10 @@ export default function DefaultLayout({children}: DefaultLayoutProps) {
 
 const Container = styled.div`
     max-width: 924px;
-    min-height: 583px;
+    max-height: 100vh;
+    //min-height: 583px;
 
     margin: 0 auto;
+
+    min-height: 100vh; /* Ensure the container takes the full viewport height */
 `

@@ -11,7 +11,6 @@ export default function SimplificationText() {
 
     return (
         <Container>
-            <Title>글 맞추기</Title>
             <TextAreaContainer>
                 <TextAreaWrapper>
                     <StyledTextArea
@@ -50,20 +49,14 @@ export default function SimplificationText() {
 
 const Container = styled.div`
     padding: 6% 6%;
-`
-
-const Title = styled.h1`
-    margin-bottom: 5%;
-    font-weight: 800;
-    font-size: 44px;
-    text-align: center;
+    border: 5px solid #f3f3f3;
+    height: 406px;
 `
 
 const TextAreaContainer = styled.section`
     display: flex;
     gap: 10%;
     height: 100%;
-
     flex-wrap: wrap;
     position: relative;
 `
@@ -71,7 +64,9 @@ const TextAreaContainer = styled.section`
 const TextAreaWrapper = styled.div`
     position: relative;
     flex: 1;
-
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     width: 100%;
 `
 
@@ -86,8 +81,10 @@ const OutTextAreaWrapper = styled.div`
 const StyledTextArea = styled(TextArea)`
     border-radius: 12px;
     resize: none;
-    height: 170px;
+    height: 100%;
     width: 100%;
+    flex: 1;
+
     background-color: white;
     outline: none;
     padding: 20px;
