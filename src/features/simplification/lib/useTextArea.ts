@@ -11,9 +11,7 @@ export const useTextArea = () => {
     }
 
     const getGptAnswer = async (text: string) => {
-        const eventSource = new EventSource(
-            `${import.meta.env.VITE_API_HOST}/gpt/stream?text=${encodeURIComponent(text)}`,
-        )
+        const eventSource = new EventSource(`https://geulmatchum-api.store/gpt/stream?text=${encodeURIComponent(text)}`)
 
         eventSource.onmessage = (event) => {
             try {
