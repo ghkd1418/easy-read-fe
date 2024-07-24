@@ -30,6 +30,7 @@ const Wrapper = styled.div`
     align-items: center;
     gap: 5%;
     height: 124px;
+    padding-left: 5%;
 `
 
 const LogoImg = styled.img`

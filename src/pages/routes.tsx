@@ -12,7 +12,7 @@ const router = createBrowserRouter([
         errorElement: <NotFound />,
     },
     {
-        path: '/simplification/*',
+        path: '/simplification',
 
         element: <Header logoSrc="/images/dadog_tr.png" title="글 맞추기" subtitle="어려운 글을 읽기 쉽게 바꿔요" />,
         children: [

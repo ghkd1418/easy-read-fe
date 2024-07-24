@@ -8,7 +8,6 @@ import {useFile} from 'features/simplification/lib/useFile.ts'
 export default function SimplificationFile() {
     const {htmlRef, handleCopy} = useCopy()
     const {files, handleChange, handleDelete, handleSubmit, isLoading, output} = useFile()
-    console.log('te', import.meta.env.VITE_API_HOST)
 
     return (
         <Container>
