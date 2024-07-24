@@ -13,13 +13,13 @@ const TabBar: React.FC = () => {
             <StyledNavLink to="/simplification" $isActive={location.pathname.startsWith('/simplification')}>
                 글 맞추기
             </StyledNavLink>
-            <StyledNavLink to="/contact" $isActive={location.pathname === '/contact'}>
+            <StyledNavLink to="/library" $isActive={location.pathname === '/contact'}>
                 글맞춤 도서관
             </StyledNavLink>
-            <StyledNavLink to="/contact/request" $isActive={location.pathname === '/contact/request'}>
+            <StyledNavLink to="/request" $isActive={location.pathname === '/request'}>
                 글맞춤 부탁하기
             </StyledNavLink>
-            <StyledNavLink to="/profile" $isActive={location.pathname === '/profile'}>
+            <StyledNavLink to="/my" $isActive={location.pathname === '/my'}>
                 나의 정보
             </StyledNavLink>
         </NavContainer>
