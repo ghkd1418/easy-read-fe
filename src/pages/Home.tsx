@@ -68,6 +68,7 @@ const Container = styled.div`
 
 const Image = styled.div`
     width: 100%;
+    margin-top: 2px;
 `
 
 const ImageLink = styled.div`

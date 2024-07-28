@@ -60,6 +60,7 @@ const Input = styled.input`
     border-radius: 15px;
     border: 1px solid #a8a8a8;
     padding-left: 5%;
+    font-size: ${({theme}) => theme.fontSize.md};
 `
 
 const ResultWrapper = styled.section`
