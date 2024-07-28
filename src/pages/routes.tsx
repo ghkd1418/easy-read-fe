@@ -6,10 +6,21 @@ import Simplification from 'pages/Simplification.tsx'
 import Home from 'pages/Home.tsx'
 import BookViewer from 'pages/BookViewer.tsx'
 import NotFound from 'pages/NotFound.tsx'
+import RequestBook from 'pages/RequestBook.tsx'
 
 const router = createBrowserRouter([
     {
         errorElement: <NotFound />,
+    },
+    {
+        path: '/',
+        element: <Header logoSrc="/images/logo_image.svg" />,
+        children: [
+            {
+                path: '',
+                element: <Home />,
+            },
+        ],
     },
     {
         path: '/simplification',
@@ -30,13 +41,20 @@ const router = createBrowserRouter([
             },
         ],
     },
+
     {
-        path: '/',
-        element: <Header logoSrc="/images/logo_image.svg" />,
+        path: '/request-book',
+        element: (
+            <Header
+                logoSrc="/images/pl.svg"
+                title="글 맞춤 부탁하기"
+                subtitle="글맞춤 도서관에 없는 책을 알려주세요."
+            />
+        ),
         children: [
             {
                 path: '',
-                element: <Home />,
+                element: <RequestBook />,
             },
         ],
     },

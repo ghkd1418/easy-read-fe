@@ -15,5 +15,5 @@ const Container = styled.div`
 
     margin: 0 auto;
 
-    min-height: 100vh; /* Ensure the container takes the full viewport height */
+    min-height: 100%;
 `

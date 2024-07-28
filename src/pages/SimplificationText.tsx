@@ -25,7 +25,7 @@ export default function SimplificationText() {
                         spellCheck={false}
                     />
                     <Button size={'md'} onClick={handleSubmit}>
-                        직접 글 쓰기
+                        바꾸기
                     </Button>
                 </TextAreaWrapper>
                 <OutTextAreaWrapper>

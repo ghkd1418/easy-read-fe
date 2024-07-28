@@ -7,29 +7,35 @@ import {useFile} from 'features/simplification/lib/useFile.ts'
 
 export default function SimplificationFile() {
     const {htmlRef, handleCopy} = useCopy()
-    const {files, handleChange, handleDelete, handleSubmit, isLoading, output} = useFile()
+    const {handleChange, handleDelete, handleSubmit, isLoading, output, previewImg} = useFile()
 
     return (
         <Container>
             <TextAreaContainer>
                 <TextAreaWrapper>
                     <FileInputContainer>
-                        <p>
-                            pdf 파일을 추천합니다!
-                            <br />
-                            <br /> pdf(피디에프), hwp(한글 파일), docx(워드) 파일을 올릴 수 있어요.
-                        </p>
-                        <input type="file" multiple onChange={handleChange} />
-                        {!!files.length &&
-                            files.map((file, index) => (
-                                <li>
-                                    <p key={index}>{file.name}</p>
-                                    <button onClick={() => handleDelete(index)}>삭제</button>
-                                </li>
-                            ))}
+                        {previewImg ? (
+                            <PreviewWrapper>
+                                <PreviewImg src={previewImg} alt="미리보기" />
+                                <button onClick={() => handleDelete(1)}>
+                                    <DeleteImg src="/images/close.svg" alt="삭제" />
+                                </button>
+                            </PreviewWrapper>
+                        ) : (
+                            <PreviewWrapper>
+                                <AcceptImg src="/images/accept.png" alt="허용확장자" />
+                                <InputLabel htmlFor="select-file">파일을 선택해주세요</InputLabel>
+                                <FileInput
+                                    type="file"
+                                    id="select-file"
+                                    onChange={handleChange}
+                                    accept=".pdf, .jpeg, .jpg, .gif, .png"
+                                />
+                            </PreviewWrapper>
+                        )}
                     </FileInputContainer>
                     <Button size={'md'} onClick={handleSubmit}>
-                        변환하기
+                        바꾸기
                     </Button>
                 </TextAreaWrapper>
                 <OutTextAreaWrapper>
@@ -139,4 +145,53 @@ const FileInputContainer = styled.div`
 
     font-family: 'Pretendard', sans-serif;
     font-size: 16px;
+
+    position: relative;
+    box-sizing: border-box;
+`
+
+const PreviewWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+`
+
+const DeleteImg = styled.img`
+    width: 24px;
+
+    position: absolute;
+    top: 5px;
+    right: 5px;
+`
+
+const PreviewImg = styled.img`
+    height: 80%;
+`
+
+const AcceptImg = styled.img`
+    width: 100%;
+`
+
+const InputLabel = styled.label`
+    background-color: ${({theme}) => theme.colors.secondary};
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    height: 20%;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    overflow: hidden;
+
+    &:hover {
+        font-weight: bold;
+        opacity: 0.9;
+    }
+`
+
+const FileInput = styled.input`
+    display: none;
 `

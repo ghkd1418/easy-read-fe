@@ -53,6 +53,7 @@ export const useTextArea = () => {
             toast.error('바꾸고 싶은 글을 입력해주세요.')
             return
         }
+        setOutput('')
         setIsLoading(true)
         getGptAnswer(input)
     }
