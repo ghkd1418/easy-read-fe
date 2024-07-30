@@ -7,6 +7,7 @@ import Home from 'pages/Home.tsx'
 import BookViewer from 'pages/BookViewer.tsx'
 import NotFound from 'pages/NotFound.tsx'
 import RequestBook from 'pages/RequestBook.tsx'
+import Library from 'pages/Library.tsx'
 
 const router = createBrowserRouter([
     {
@@ -41,15 +42,20 @@ const router = createBrowserRouter([
             },
         ],
     },
-
+    {
+        path: '/library',
+        element: <Header logoSrc="/images/dadog_tr.png" title="글맞춤 도서관" />,
+        children: [
+            {
+                path: '',
+                element: <Library />,
+            },
+        ],
+    },
     {
         path: '/request-book',
         element: (
-            <Header
-                logoSrc="/images/pl.svg"
-                title="글 맞춤 부탁하기"
-                subtitle="글맞춤 도서관에 없는 책을 알려주세요."
-            />
+            <Header logoSrc="/images/pl.svg" title="글맞춤 부탁하기" subtitle="글맞춤 도서관에 없는 책을 알려주세요." />
         ),
         children: [
             {
