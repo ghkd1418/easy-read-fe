@@ -14,8 +14,8 @@ export default function RequestBook() {
                     <Input placeholder={'책을 쓴 사람의 이름을 써주세요.'} type="text" id={'author'} />
                 </InputWrapper>
                 <InputWrapper>
-                    <Label htmlFor="company">출판사</Label>
-                    <Input placeholder={'책을 만든 출판사의 이름을 써주세요.'} type="text" id={'company'} />
+                    <Label htmlFor="publisher">출판사</Label>
+                    <Input placeholder={'책을 만든 출판사의 이름을 써주세요.'} type="text" id={'publisher'} />
                 </InputWrapper>
                 <Button size={'md'}>책 검색하기</Button>
             </SearchWrapper>

@@ -29,6 +29,9 @@ export default function Home() {
                 showStatus={false}
                 emulateTouch
                 infiniteLoop={true}
+                autoPlay
+                interval={5000}
+                transitionTime={1000}
                 onChange={onChange}
                 onClickItem={onClickItem}
                 onClickThumb={onClickThumb}
@@ -40,24 +43,13 @@ export default function Home() {
                 ))}
             </Carousel>
             <SubTitle>글맞춤에서 확인해볼 것들</SubTitle>
-            <Carousel
-                showArrows={true}
-                centerSlidePercentage={33}
-                showThumbs={false}
-                showStatus={false}
-                emulateTouch
-                centerMode={true}
-                infiniteLoop={true}
-                onChange={onChange}
-                onClickItem={onClickItem}
-                onClickThumb={onClickThumb}
-            >
+            <Wrapper>
                 {linkImages.map((path, index) => (
                     <ImageLink key={index}>
                         <img src={path} alt={`tutorial ${index + 1}`} />
                     </ImageLink>
                 ))}
-            </Carousel>
+            </Wrapper>
         </Container>
     )
 }
@@ -71,11 +63,24 @@ const Image = styled.div`
     margin-top: 2px;
 `
 
+const Wrapper = styled.div`
+    display: flex;
+    width: 100%;
+    gap: 1%;
+`
+
 const ImageLink = styled.div`
     cursor: pointer;
+    width: 100%;
+    flex: 1;
 
-    &hover {
-        //opacity: 0.2;
+    &:hover {
+        opacity: 0.9;
+        flex: 1.1;
+    }
+
+    img {
+        width: 100%;
     }
 `
 
