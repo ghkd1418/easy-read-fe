@@ -24,12 +24,13 @@ const Container = styled.button<{size: 'sm' | 'md' | 'lg'}>`
             case 'lg':
                 return '83px'
             default:
-                return '83px'
+                return '60px'
         }
     }};
     background-color: ${({theme}) => theme.colors.primary};
     font-size: ${({theme}) => theme.fontSize.lg};
     border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow here */
 
     font-family: 'Pretendard', sans-serif;
     font-weight: 500;
@@ -41,5 +42,6 @@ const Container = styled.button<{size: 'sm' | 'md' | 'lg'}>`
 
     &:hover {
         opacity: 0.9;
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
     }
 `

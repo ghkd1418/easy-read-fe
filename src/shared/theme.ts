@@ -7,7 +7,7 @@ const fontSize = {
 }
 
 const colors = {
-    primary: '#fc4100',
+    primary: '#FF7949',
     secondary: '#FFC55A',
     tertiary: '#00215E',
 }

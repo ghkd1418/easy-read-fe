@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {readFiles} from 'shared/readFiles.ts'
+import customAxios from 'shared/customAxios.ts'
 
 const PDF_IMAGE_URL = '/images/pdf.svg'
 const processFileDataURL = (dataURL: string): string => {
@@ -13,7 +14,7 @@ const processFileDataURL = (dataURL: string): string => {
 export const useFile = () => {
     const [files, setFiles] = useState<File[]>([])
     const [previewImg, setPreviewImg] = useState<string>()
-    const [isLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [output] = useState('')
 
     const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +33,28 @@ export const useFile = () => {
         setPreviewImg('')
     }
 
-    const handleSubmit = () => {}
+    const handleSubmit = async () => {
+        setIsLoading(true)
+        try {
+            const formData = new FormData()
+
+            formData.append('image', files[0])
+
+            const response = await customAxios.post('/text/image', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+
+            const {data} = response
+            console.log(data)
+            // setOutput(JSON.stringify(data, null, 2)) // 예시로 응답 데이터를 문자열로 저장
+        } catch (error) {
+            console.error('Error submitting files:', error)
+        } finally {
+            setIsLoading(false)
+        }
+    }
 
     return {files, handleChange, handleDelete, handleSubmit, isLoading, output, previewImg}
 }

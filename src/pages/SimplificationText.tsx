@@ -105,6 +105,8 @@ const StyledOutputTextArea = styled(StyledTextArea)`
     scrollbar-width: thin;
     border: none;
     height: 100%;
+
+    line-height: 24px;
 `
 
 const CopyButton = styled.button`

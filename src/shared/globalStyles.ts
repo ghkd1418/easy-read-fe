@@ -112,6 +112,10 @@ const GlobalStyle = createGlobalStyle`
     body {
         font-family: 'Pretendard', sans-serif;
     }
+
+    input:focus {
+        outline: none;
+    }
 `
 
 export default GlobalStyle

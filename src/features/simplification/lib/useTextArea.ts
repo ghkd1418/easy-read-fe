@@ -21,7 +21,6 @@ export const useTextArea = () => {
                 const messageContent = parsedData.choices[0]?.delta?.content || ''
                 const finishReason = parsedData.choices[0]?.finish_reason
 
-                // messageContent 가 있으면 loading(true)로 설정
                 if (messageContent) {
                     setIsLoading(false)
                 }
