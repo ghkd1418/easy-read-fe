@@ -85,7 +85,11 @@ const router = createBrowserRouter([
     {
         path: '/my',
         element: (
-            <Header logoSrc="/images/pl.svg" title="글맞춤 부탁하기" subtitle="글맞춤 도서관에 없는 책을 알려주세요." />
+            <Header
+                logoSrc="/images/pl.svg"
+                title="나의 글맞춤 부탁하기"
+                subtitle="내가 부탁한 책, 글맞춤이 어디까지 되었는지 보세요."
+            />
         ),
         children: [
             {
