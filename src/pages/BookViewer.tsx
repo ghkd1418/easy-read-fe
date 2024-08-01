@@ -115,6 +115,7 @@ const Left = styled.div`
     line-height: 1.3rem;
     overflow-y: auto;
     height: 406px;
+    padding-right: 5%;
 `
 
 const Right = styled.div`
@@ -123,6 +124,7 @@ const Right = styled.div`
     overflow-y: auto;
     line-height: 1.3rem;
     height: 406px;
+    margin-left: 5%;
 `
 
 const customStyles = {
