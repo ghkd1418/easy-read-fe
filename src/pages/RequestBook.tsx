@@ -288,7 +288,7 @@ const ModalClose = styled.button`
 const customStyles = {
     content: {
         width: '90%',
-        height: '50%',
+        height: '80%',
 
         top: '50%',
         left: '50%',
