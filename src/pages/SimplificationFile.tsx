@@ -81,6 +81,7 @@ const TextAreaWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 16px;
+    max-height: 100%;
 `
 
 const OutTextAreaWrapper = styled.div`
@@ -159,7 +160,7 @@ const PreviewWrapper = styled.div`
     align-items: center;
     flex-direction: column;
     height: 100%;
-    width: 100%;
+    width: 60%;
 `
 
 const DeleteImg = styled.img`
