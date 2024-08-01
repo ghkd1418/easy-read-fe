@@ -2,6 +2,10 @@ import styled from 'styled-components'
 import Modal from 'react-modal'
 import {useModal} from 'features/simplification/lib/useModal.ts'
 import {Button} from 'features/simplification/ui/Button.tsx'
+import {useEffect, useState} from 'react'
+import {Book} from 'features/search/useBookSearch.ts'
+import {useNavigate} from 'react-router-dom'
+import customAxios from 'shared/customAxios.ts'
 
 export default function Library() {
     const {isModalOpen, closeModal, openModal} = useModal()
@@ -9,14 +13,52 @@ export default function Library() {
         openModal()
     }
 
+    const [IngBook, setIngBook] = useState<Book[]>([])
+    const [IngBook1, setIngBook1] = useState<Book[]>([])
+    const navigation = useNavigate()
+
+    console.log(IngBook)
+
+    useEffect(() => {
+        const fetchRequested = async () => {
+            const {data} = await customAxios.get('/book/recent')
+            setIngBook(data)
+        }
+
+        const fetchRequested1 = async () => {
+            const {data} = await customAxios.get('/book/view')
+            setIngBook1(data)
+        }
+        fetchRequested()
+        fetchRequested1()
+    }, [])
+
+    const handleView = () => {
+        // navigation('/my/view')
+    }
+
     return (
         <Container>
-            <TextAreaContainer>
-                <BookContainer>
-                    <BookImg src="/images/book.png" alt="시선으로부터." />
-                    <HoverText onClick={handleClick}>부탁하기</HoverText>
-                </BookContainer>
-            </TextAreaContainer>
+            <Title>새로 들어온 책</Title>
+            <BookWrapper>
+                {IngBook.map((book) => (
+                    <BookDiv onClick={handleView} key={book?.isbn}>
+                        <BookImg src={book?.cover} alt={book?.title} />
+                        <BookTitle>{book?.title}</BookTitle>
+                        <BookAuthor>{book?.author}</BookAuthor>
+                    </BookDiv>
+                ))}
+            </BookWrapper>
+            <Title>인기 많은 책</Title>
+            <BookWrapper>
+                {IngBook1.map((book) => (
+                    <BookDiv onClick={handleView} key={book?.isbn}>
+                        <BookImg src={book?.cover} alt={book?.title} />
+                        <BookTitle>{book?.title}</BookTitle>
+                        <BookAuthor>{book?.author}</BookAuthor>
+                    </BookDiv>
+                ))}
+            </BookWrapper>
 
             <Modal isOpen={isModalOpen} onRequestClose={closeModal} style={customStyles} contentLabel="Example Modal">
                 <img height={'50%'} src="/images/book.png" alt="" />
@@ -42,6 +84,7 @@ const Container = styled.div`
     padding: 6% 6%;
     border: 5px solid #f3f3f3;
     height: 406px;
+    overflow-y: scroll;
 `
 
 const TextAreaContainer = styled.section`
@@ -62,11 +105,11 @@ const BookContainer = styled.div`
     }
 `
 
-const BookImg = styled.img`
-    height: 100%;
-    width: 100%;
-    display: block;
-`
+// const BookImg = styled.img`
+//     height: 100%;
+//     width: 100%;
+//     display: block;
+// `
 
 const HoverText = styled.div`
     position: absolute;
@@ -138,3 +181,43 @@ const customStyles = {
         backgroundColor: 'rgba(198, 198, 198, 0.6)',
     },
 }
+
+const BookImg = styled.img`
+    height: 150px;
+`
+
+const BookWrapper = styled.div`
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex: 0.5;
+    gap: 5%;
+`
+
+const BookDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    gap: 2%;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+    }
+`
+
+const Title = styled.h1`
+    font-weight: 700;
+    border-bottom: solid black 1px;
+    line-height: 40px;
+    height: 40px;
+    margin-bottom: 20px;
+`
+
+const BookTitle = styled.h2`
+    font-weight: bold;
+`
+
+const BookAuthor = styled.p`
+    color: gray;
+`

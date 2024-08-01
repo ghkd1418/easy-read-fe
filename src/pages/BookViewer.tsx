@@ -1,27 +1,56 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import Modal from 'react-modal'
 import {useModal} from 'features/simplification/lib/useModal.ts'
+import customAxios from 'shared/customAxios.ts'
 
 export default function BookViewer() {
     const {isModalOpen, closeModal, openModal} = useModal()
+    const [pages, setPages] = useState([])
+
+    const [count, setCount] = useState(1)
+    console.log(pages)
 
     useEffect(() => {
-        // const getImage = async () => {
-        //     const responseImageUrl = await customAxios.get('/karlo?keyword=happy')
-        //     console.log('responseImageUrl', responseImageUrl)
-        // }
-        // getImage()
         openModal()
     }, [])
+
+    useEffect(() => {
+        const getImage = async () => {
+            const {data} = await customAxios.get('/book/content', {
+                params: {
+                    ISBN: 'K602835035',
+                    pageId: count,
+                    userId: 1,
+                },
+            })
+
+            setPages(data.content)
+        }
+        getImage()
+    }, [count])
+
+    const handleNext = () => {
+        setCount((prev) => prev + 1)
+    }
+
+    const handlePrev = () => {
+        setCount((prev) => prev - 1)
+    }
 
     return (
         <Container>
             <Wrapper>
                 <Title>책 제목</Title>
                 <Content>
-                    <Left></Left>
-                    <Right></Right>
+                    <Left onClick={handlePrev}>
+                        <p>{pages[0]?.content}</p>
+                        <img width={'80%'} src={pages[0]?.imgUrl} alt="" />
+                    </Left>
+                    <Right onClick={handleNext}>
+                        <p>{pages[1]?.content}</p>
+                        <img width={'80%'} src={pages[1]?.imgUrl} alt="" />
+                    </Right>
                 </Content>
             </Wrapper>
 
@@ -68,15 +97,24 @@ const Content = styled.div`
     flex: 1;
     background-color: white;
     border-radius: 10px;
+    padding: 5%;
 `
 
 const Left = styled.div`
     border-right: 1px solid black;
     flex: 1;
+    white-space: pre-wrap;
+    line-height: 1.3rem;
+    overflow-y: auto;
+    height: 406px;
 `
 
 const Right = styled.div`
     flex: 1;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    line-height: 1.3rem;
+    height: 406px;
 `
 
 const customStyles = {

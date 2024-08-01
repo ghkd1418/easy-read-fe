@@ -17,7 +17,6 @@ export default function MyInfo() {
                     userId: 1,
                 },
             })
-
             setIngBook(data)
         }
         fetchRequested()
