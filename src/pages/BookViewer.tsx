@@ -13,6 +13,7 @@ export default function BookViewer() {
 
     const [searchParams] = useSearchParams()
     const isbn = searchParams.get('isbn')
+    const title = searchParams.get('title')
 
     console.log(pages)
 
@@ -49,7 +50,7 @@ export default function BookViewer() {
     return (
         <Container>
             <Wrapper>
-                <Title>책 제목</Title>
+                <Title>{title}</Title>
                 <Content>
                     <Left onClick={handlePrev}>
                         <p>{pages[0]?.content}</p>

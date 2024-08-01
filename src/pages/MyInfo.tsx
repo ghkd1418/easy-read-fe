@@ -56,8 +56,8 @@ export default function MyInfo() {
         }
     }
 
-    const handleView = (isbn) => {
-        navigation(`/my/view?isbn=${isbn}`)
+    const handleView = (title, isbn) => {
+        navigation(`/my/view?isbn=${isbn}&title=${title}`)
     }
 
     return (
@@ -65,7 +65,7 @@ export default function MyInfo() {
             <Title>아직 글맞춤 하고있는 책</Title>
             <BookWrapper>
                 {IngBook.map((book) => (
-                    <BookDiv onClick={() => handleView(book.requestId.isbn)} key={book?.isbn}>
+                    <BookDiv onClick={() => handleView(book.title, book.requestId.isbn)} key={book?.isbn}>
                         <BookImg src={book?.cover} alt={book?.title} />
                         <BookTitle>{book?.title}</BookTitle>
                         <BookAuthor>{book?.author}</BookAuthor>
