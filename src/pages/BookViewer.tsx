@@ -1,5 +1,4 @@
 import {useEffect} from 'react'
-import TabBar from 'app/layouts/TabBar.tsx'
 import styled from 'styled-components'
 import Modal from 'react-modal'
 import {useModal} from 'features/simplification/lib/useModal.ts'
@@ -18,7 +17,6 @@ export default function BookViewer() {
 
     return (
         <Container>
-            <TabBar />
             <Wrapper>
                 <Title>책 제목</Title>
                 <Content>
@@ -83,7 +81,7 @@ const Right = styled.div`
 
 const customStyles = {
     content: {
-        top: '5%',
+        top: '10%',
         left: '50%',
         right: 'auto',
         bottom: 'auto',

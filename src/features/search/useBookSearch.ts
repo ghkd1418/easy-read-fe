@@ -2,7 +2,7 @@
 import {useState} from 'react'
 import customAxios from 'shared/customAxios.ts'
 
-interface Book {
+export interface Book {
     author: string
     categoryName: string
     cover: string
@@ -12,6 +12,7 @@ interface Book {
     publisher: string
     status: string
     title: string
+    progress?: string
 }
 
 export const useBookSearch = () => {

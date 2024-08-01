@@ -10,6 +10,7 @@ const colors = {
     primary: '#FF7949',
     secondary: '#FFC55A',
     tertiary: '#00215E',
+    buttonColor: '#516b97',
 }
 
 const theme = {

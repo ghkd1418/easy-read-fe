@@ -1,14 +1,43 @@
 // RequestBook.tsx
 import styled from 'styled-components'
 import {Button} from 'features/simplification/ui/Button.tsx'
-import {useBookSearch} from 'features/search/useBookSearch.ts'
+import {Book, useBookSearch} from 'features/search/useBookSearch.ts'
+import {useModal} from 'features/simplification/lib/useModal.ts'
+import Modal from 'react-modal'
+import customAxios from 'shared/customAxios.ts'
+import {FormEvent, useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 
 export default function RequestBook() {
     const {title, setTitle, author, setAuthor, publisher, setPublisher, results, handleSearch} = useBookSearch()
+    const {isModalOpen, closeModal, openModal} = useModal()
+    const [bookInfo, setBookInfo] = useState<Book | null>(null)
+    const navigation = useNavigate()
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleClick = async (book: Book) => {
+        openModal()
+        console.log(book)
+        const {data} = await customAxios.get('/book/info', {
+            params: {
+                isbn: 'K622931298',
+            },
+        })
+
+        setBookInfo(data)
+    }
+
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         handleSearch()
+    }
+
+    const handlePush = async (isbn: string, title: string) => {
+        await customAxios.post('/request', {
+            userId: 1,
+            isbn,
+        })
+
+        navigation(`/request-book/success?isbn=${isbn}&title=${title}`)
     }
 
     return (
@@ -55,18 +84,35 @@ export default function RequestBook() {
                 {results.length > 0 ? (
                     <BookList>
                         {results.map((book) => (
-                            <BookContainer key={book.isbn} status={book.status}>
-                                <img src={book.cover} alt={`${book.title} cover`} />
-                                <h3>{book.title}</h3>
-                                <p>{book.author}</p>
-                                <Status status={book.status}>{statusLabels[book.status]}</Status>
-                            </BookContainer>
+                            <BookWrapper>
+                                <BookContainer key={book.isbn} status={book.status}>
+                                    <img src={book.cover} alt={`${book.title} cover`} />
+                                    <h3>{book.title}</h3>
+                                    <p>{book.author}</p>
+                                    <Status status={book.status}>{statusLabels[book.status]}</Status>
+                                </BookContainer>
+                                <HoverText onClick={() => handleClick(book)}>부탁하기</HoverText>
+                            </BookWrapper>
                         ))}
                     </BookList>
                 ) : (
                     <p>책을 검색해보세요.</p>
                 )}
             </ResultWrapper>
+            <Modal isOpen={isModalOpen} onRequestClose={closeModal} style={customStyles} contentLabel="Example Modal">
+                <ModalImage height={'50%'} src={bookInfo?.cover} alt={bookInfo?.title} />
+                <ModalContent>
+                    <ModalTitle>{bookInfo?.title}</ModalTitle>
+                    <ModalSubTitle>{bookInfo?.author}</ModalSubTitle>
+                    <ModalText>{bookInfo?.description}</ModalText>
+                    <ModalClose onClick={closeModal}>
+                        <img src="/images/x.svg" alt="닫기" />
+                    </ModalClose>
+                    <Button onClick={() => handlePush(bookInfo?.isbn, bookInfo?.title)} size={'md'}>
+                        읽기 쉬운 책 부탁하기
+                    </Button>
+                </ModalContent>
+            </Modal>
         </Container>
     )
 }
@@ -138,6 +184,11 @@ const BookContainer = styled.div<{status: string}>`
     text-overflow: ellipsis;
     padding: 10px;
 
+    &:hover {
+        background-color: red;
+        cursor: pointer;
+    }
+
     img {
         width: 100%;
         height: auto;
@@ -172,4 +223,92 @@ const getStatusColor = (status: string) => {
         default:
             return '#000000'
     }
+}
+
+const BookWrapper = styled.div`
+    position: relative;
+    height: 50%;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.7;
+    }
+`
+
+const HoverText = styled.div`
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s;
+
+    ${BookWrapper}:hover & {
+        opacity: 0.9;
+    }
+`
+
+const ModalImage = styled.img`
+    flex: 0.5;
+`
+
+const ModalContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    gap: 10%;
+    height: 100%;
+    width: 30%;
+`
+
+const ModalTitle = styled.h1`
+    font-size: ${({theme}) => theme.fontSize.lg};
+    font-weight: bold;
+`
+
+const ModalSubTitle = styled.h3`
+    font-size: ${({theme}) => theme.fontSize.md};
+    font-weight: bold;
+`
+
+const ModalText = styled.p`
+    white-space: white-space;
+`
+
+const ModalClose = styled.button`
+    position: absolute;
+    right: 2%;
+    top: 2%;
+`
+
+const customStyles = {
+    content: {
+        width: '90%',
+        height: '50%',
+
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'white',
+        display: 'flex',
+        gap: '5%',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        color: 'black',
+
+        padding: '5%',
+
+        overflowX: 'scroll',
+    },
+    overlay: {
+        backgroundColor: 'rgba(198, 198, 198, 0.6)',
+    },
 }

@@ -74,7 +74,7 @@ const TextAreaContainer = styled.section`
 
 const TextAreaWrapper = styled.div`
     position: relative;
-    width: 50%;
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -82,7 +82,7 @@ const TextAreaWrapper = styled.div`
 
 const OutTextAreaWrapper = styled.div`
     position: relative;
-    flex: 1;
+    flex: 1.3;
     width: 100%;
     border: 1px solid #a8a8a8;
     border-radius: 12px;

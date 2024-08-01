@@ -27,7 +27,8 @@ const Container = styled.button<{size: 'sm' | 'md' | 'lg'}>`
                 return '60px'
         }
     }};
-    background-color: ${({theme}) => theme.colors.primary};
+    color: white;
+    background-color: ${({theme}) => theme.colors.buttonColor};
     font-size: ${({theme}) => theme.fontSize.lg};
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow here */

@@ -8,6 +8,8 @@ import BookViewer from 'pages/BookViewer.tsx'
 import NotFound from 'pages/NotFound.tsx'
 import RequestBook from 'pages/RequestBook.tsx'
 import Library from 'pages/Library.tsx'
+import RequestSuccess from 'pages/RequestSuccess.tsx'
+import MyInfo from 'pages/MyInfo.tsx'
 
 const router = createBrowserRouter([
     {
@@ -62,11 +64,34 @@ const router = createBrowserRouter([
                 path: '',
                 element: <RequestBook />,
             },
+            {
+                path: 'success',
+                element: <RequestSuccess />,
+            },
         ],
     },
     {
         path: '/',
+        element: (
+            <Header logoSrc="/images/pl.svg" title="글맞춤 부탁하기" subtitle="글맞춤 도서관에 없는 책을 알려주세요." />
+        ),
         children: [
+            {
+                path: 'view',
+                element: <BookViewer />,
+            },
+        ],
+    },
+    {
+        path: '/my',
+        element: (
+            <Header logoSrc="/images/pl.svg" title="글맞춤 부탁하기" subtitle="글맞춤 도서관에 없는 책을 알려주세요." />
+        ),
+        children: [
+            {
+                path: '',
+                element: <MyInfo />,
+            },
             {
                 path: 'view',
                 element: <BookViewer />,

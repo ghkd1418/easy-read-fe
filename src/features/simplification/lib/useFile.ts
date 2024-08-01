@@ -37,10 +37,10 @@ export const useFile = () => {
         setIsLoading(true)
         try {
             const formData = new FormData()
+            console.log(files[0])
+            formData.append('file', files[0])
 
-            formData.append('image', files[0])
-
-            const response = await customAxios.post('/text/image', formData, {
+            const response = await customAxios.post('/text/file', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

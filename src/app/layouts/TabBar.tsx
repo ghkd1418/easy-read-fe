@@ -19,7 +19,7 @@ const TabBar: React.FC = () => {
             <StyledNavLink to="/request-book" $isActive={location.pathname === '/request-book'}>
                 글맞춤 부탁하기
             </StyledNavLink>
-            <StyledNavLink to="/view" $isActive={location.pathname === '/my'}>
+            <StyledNavLink to="/my" $isActive={location.pathname === '/my'}>
                 나의 정보
             </StyledNavLink>
         </NavContainer>

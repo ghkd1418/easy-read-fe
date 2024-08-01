@@ -59,7 +59,7 @@ const StyledLink = styled(Link)`
     font-family: 'Pretendard', sans-serif;
     font-weight: 500;
 
-    background-color: ${({theme}) => theme.colors.primary};
+    background-color: ${({theme}) => theme.colors.buttonColor};
     font-size: ${({theme}) => theme.fontSize.lg};
 
     display: flex;
