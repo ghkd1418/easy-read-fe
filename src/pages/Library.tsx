@@ -15,6 +15,7 @@ export default function Library() {
 
     const [IngBook, setIngBook] = useState<Book[]>([])
     const [IngBook1, setIngBook1] = useState<Book[]>([])
+    const [IngBook2, setIngBook2] = useState<Book[]>([])
     const navigation = useNavigate()
 
     console.log(IngBook)
@@ -29,8 +30,14 @@ export default function Library() {
             const {data} = await customAxios.get('/book/view')
             setIngBook1(data)
         }
+        const fetchRequested2 = async () => {
+            const {data} = await customAxios.get('/book/recommend')
+            setIngBook2(data)
+        }
+
         fetchRequested()
         fetchRequested1()
+        fetchRequested2()
     }, [])
 
     const handleView = () => {
@@ -52,6 +59,16 @@ export default function Library() {
             <Title>인기 많은 책</Title>
             <BookWrapper>
                 {IngBook1.map((book) => (
+                    <BookDiv onClick={handleView} key={book?.isbn}>
+                        <BookImg src={book?.cover} alt={book?.title} />
+                        <BookTitle>{book?.title}</BookTitle>
+                        <BookAuthor>{book?.author}</BookAuthor>
+                    </BookDiv>
+                ))}
+            </BookWrapper>
+            <Title>다독이가 추천하는 리스트</Title>
+            <BookWrapper>
+                {IngBook2.map((book) => (
                     <BookDiv onClick={handleView} key={book?.isbn}>
                         <BookImg src={book?.cover} alt={book?.title} />
                         <BookTitle>{book?.title}</BookTitle>

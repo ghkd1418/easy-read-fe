@@ -16,10 +16,9 @@ export default function RequestBook() {
 
     const handleClick = async (book: Book) => {
         openModal()
-        console.log(book)
         const {data} = await customAxios.get('/book/info', {
             params: {
-                isbn: 'K622931298',
+                isbn: book.isbn,
             },
         })
 
