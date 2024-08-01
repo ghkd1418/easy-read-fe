@@ -12,15 +12,21 @@ export default function RequestSuccess() {
         navigation('/my')
     }
 
+    const handleRetry = () => {
+        navigation('/request-book')
+    }
+
     return (
         <Container>
             <Title>{title}</Title>
             <Content>
-                ‘김유정 소설집’ 의 글맞춤 부탁을 전달했어요! '나의 정보'에서 얼마나 되고 있는지 확인할 수 있어요.{' '}
+                `{title} 의 글맞춤 부탁을 전달했어요! '나의 정보'에서 얼마나 되고 있는지 확인할 수 있어요.`
             </Content>
             <Image src="/images/celdadog.png" alt="" />
             <ButtonWrapper>
-                <RetryButton size={'md'}>다시하기</RetryButton>
+                <RetryButton onClick={handleRetry} size={'md'}>
+                    다시하기
+                </RetryButton>
                 <Button onClick={handleClick} size={'md'}>
                     나의 부탁 확인하기
                 </Button>
@@ -77,5 +83,5 @@ const RetryButton = styled.button`
 
 const Image = styled.img`
     //width: 50px;
-    width: 50%;
+    width: 30%;
 `

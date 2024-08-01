@@ -11,11 +11,11 @@ export default function Home() {
 
     const imagePaths = [
         '/images/tutorial1.png',
-        '/images/tutorial2.png',
+        '/images/tutorial6.png',
         '/images/tutorial3.png',
         '/images/tutorial4.png',
         '/images/tutorial5.png',
-        '/images/tutorial6.png',
+        '/images/tutorial2.png',
     ]
 
     const linkImages = ['/images/link1.png', '/images/link2.png', '/images/link3.png']

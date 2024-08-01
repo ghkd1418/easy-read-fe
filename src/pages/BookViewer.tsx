@@ -3,12 +3,17 @@ import styled from 'styled-components'
 import Modal from 'react-modal'
 import {useModal} from 'features/simplification/lib/useModal.ts'
 import customAxios from 'shared/customAxios.ts'
+import {useSearchParams} from 'react-router-dom'
 
 export default function BookViewer() {
     const {isModalOpen, closeModal, openModal} = useModal()
     const [pages, setPages] = useState([])
 
     const [count, setCount] = useState(1)
+
+    const [searchParams] = useSearchParams()
+    const isbn = searchParams.get('isbn')
+
     console.log(pages)
 
     useEffect(() => {
@@ -16,10 +21,13 @@ export default function BookViewer() {
     }, [])
 
     useEffect(() => {
+        if (!isbn) {
+            return
+        }
         const getImage = async () => {
             const {data} = await customAxios.get('/book/content', {
                 params: {
-                    ISBN: 'K602835035',
+                    ISBN: isbn,
                     pageId: count,
                     userId: 1,
                 },
