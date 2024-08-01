@@ -94,10 +94,11 @@ const Wrapper = styled.div`
 `
 
 const Title = styled.h1`
-    font-size: ${({theme}) => theme.fontSize.lg};
+    font-size: ${({theme}) => theme.fontSize.md};
     text-align: center;
     height: fit-content;
     line-height: 3rem;
+    font-weight: 600;
 `
 
 const Content = styled.div`
