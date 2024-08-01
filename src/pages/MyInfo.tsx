@@ -96,6 +96,8 @@ export default function MyInfo() {
 const Container = styled.main`
     border: 5px solid #f3f3f3;
     max-height: 406px;
+    padding: 6% 6%;
+
     display: flex;
     flex-direction: column;
     gap: 5%;
