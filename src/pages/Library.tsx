@@ -40,8 +40,8 @@ export default function Library() {
         fetchRequested2()
     }, [])
 
-    const handleView = () => {
-        // navigation('/my/view')
+    const handleView = (isbn, title) => {
+        navigation(`/my/view?isbn=${isbn}&title=${title}`)
     }
 
     return (
@@ -49,7 +49,7 @@ export default function Library() {
             <Title>새로 들어온 책</Title>
             <BookWrapper>
                 {IngBook.map((book) => (
-                    <BookDiv onClick={handleView} key={book?.isbn}>
+                    <BookDiv onClick={() => handleView(book.isbn, book.title)} key={book?.isbn}>
                         <BookImg src={book?.cover} alt={book?.title} />
                         <BookTitle>{book?.title}</BookTitle>
                         <BookAuthor>{book?.author}</BookAuthor>

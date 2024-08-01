@@ -99,7 +99,7 @@ export default function RequestBook() {
                 )}
             </ResultWrapper>
             <Modal isOpen={isModalOpen} onRequestClose={closeModal} style={customStyles} contentLabel="Example Modal">
-                <ModalImage height={'50%'} src={bookInfo?.cover} alt={bookInfo?.title} />
+                <ModalImage height={'70%'} src={bookInfo?.cover} alt={bookInfo?.title} />
                 <ModalContent>
                     <ModalTitle>{bookInfo?.title}</ModalTitle>
                     <ModalSubTitle>{bookInfo?.author}</ModalSubTitle>
