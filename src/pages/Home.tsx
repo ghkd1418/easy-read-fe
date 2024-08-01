@@ -1,8 +1,10 @@
 import {Carousel} from 'react-responsive-carousel'
 import styled from 'styled-components'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import {useNavigate} from 'react-router-dom'
 
 export default function Home() {
+    const navigation = useNavigate()
     const onChange = () => {}
 
     const onClickItem = () => {}
@@ -19,6 +21,10 @@ export default function Home() {
     ]
 
     const linkImages = ['/images/link1.png', '/images/link2.png', '/images/link3.png']
+
+    const handleLink = () => {
+        navigation('/library')
+    }
 
     return (
         <Container>
@@ -45,7 +51,7 @@ export default function Home() {
             <SubTitle>글맞춤에서 확인해볼 것들</SubTitle>
             <Wrapper>
                 {linkImages.map((path, index) => (
-                    <ImageLink key={index}>
+                    <ImageLink onClick={handleLink} key={index}>
                         <img src={path} alt={`tutorial ${index + 1}`} />
                     </ImageLink>
                 ))}
