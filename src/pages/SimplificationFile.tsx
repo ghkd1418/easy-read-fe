@@ -34,8 +34,11 @@ export default function SimplificationFile() {
                             </PreviewWrapper>
                         )}
                     </FileInputContainer>
-                    <Button size={'md'} onClick={handleSubmit}>
-                        바꾸기
+                    <Button size={'md'} onClick={() => handleSubmit('image')}>
+                        이미지 바꾸기
+                    </Button>
+                    <Button size={'md'} onClick={() => handleSubmit('pdf')}>
+                        pdf 바꾸기
                     </Button>
                 </TextAreaWrapper>
                 <OutTextAreaWrapper>

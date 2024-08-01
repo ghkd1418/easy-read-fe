@@ -15,7 +15,7 @@ export const useFile = () => {
     const [files, setFiles] = useState<File[]>([])
     const [previewImg, setPreviewImg] = useState<string>()
     const [isLoading, setIsLoading] = useState(false)
-    const [output] = useState('')
+    const [output, setOutput] = useState('')
 
     const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files
@@ -33,22 +33,22 @@ export const useFile = () => {
         setPreviewImg('')
     }
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (type: string) => {
         setIsLoading(true)
         try {
             const formData = new FormData()
             console.log(files[0])
-            formData.append('file', files[0])
+            formData.append(type, files[0])
 
-            const response = await customAxios.post('/text/file', formData, {
+            const response = await customAxios.post(`/text/${type}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             })
 
             const {data} = response
-            console.log(data)
-            // setOutput(JSON.stringify(data, null, 2)) // 예시로 응답 데이터를 문자열로 저장
+            console.log(data.text)
+            setOutput(data.text)
         } catch (error) {
             console.error('Error submitting files:', error)
         } finally {
