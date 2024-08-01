@@ -160,7 +160,7 @@ const PreviewWrapper = styled.div`
     align-items: center;
     flex-direction: column;
     height: 100%;
-    width: 60%;
+    width: 100%;
 `
 
 const DeleteImg = styled.img`
@@ -172,7 +172,7 @@ const DeleteImg = styled.img`
 `
 
 const PreviewImg = styled.img`
-    width: 100%;
+    width: 60%;
 `
 
 const AcceptImg = styled.img`
