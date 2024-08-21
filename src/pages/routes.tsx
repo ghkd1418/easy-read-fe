@@ -46,7 +46,9 @@ const router = createBrowserRouter([
     },
     {
         path: '/library',
-        element: <Header logoSrc="/images/dadog_tr.png" title="글맞춤 도서관" />,
+        element: (
+            <Header logoSrc="/images/dadog_tr.png" title="글맞춤 도서관" subtitle="쉽게 읽을 수 있는 책을 찾아봐요" />
+        ),
         children: [
             {
                 path: '',

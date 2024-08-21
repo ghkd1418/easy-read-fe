@@ -5,10 +5,9 @@ import {useNavigate} from 'react-router-dom'
 
 export default function Home() {
     const navigation = useNavigate()
+
     const onChange = () => {}
-
     const onClickItem = () => {}
-
     const onClickThumb = () => {}
 
     const imagePaths = [
@@ -22,8 +21,8 @@ export default function Home() {
 
     const linkImages = ['/images/link1.png', '/images/link2.png', '/images/link3.png']
 
-    const handleLink = () => {
-        navigation('/library')
+    const handleLink = (index: number) => {
+        navigation(`/library#section${index}`)
     }
 
     return (
@@ -51,7 +50,7 @@ export default function Home() {
             <SubTitle>글맞춤에서 확인해볼 것들</SubTitle>
             <Wrapper>
                 {linkImages.map((path, index) => (
-                    <ImageLink onClick={handleLink} key={index}>
+                    <ImageLink onClick={() => handleLink(index)} key={index}>
                         <img src={path} alt={`tutorial ${index + 1}`} />
                     </ImageLink>
                 ))}

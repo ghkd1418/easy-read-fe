@@ -163,14 +163,13 @@ const Input = styled.input`
 
 const ResultWrapper = styled.section`
     flex: 1;
-    padding: 3% 3%;
     overflow-x: auto;
-    white-space: nowrap;
 `
 
 const BookList = styled.div`
     display: flex;
     gap: 20px;
+    height: 100%;
 `
 
 const BookContainer = styled.div<{status: string}>`
@@ -184,7 +183,6 @@ const BookContainer = styled.div<{status: string}>`
     padding: 10px;
 
     &:hover {
-        background-color: red;
         cursor: pointer;
     }
 
@@ -226,7 +224,7 @@ const getStatusColor = (status: string) => {
 
 const BookWrapper = styled.div`
     position: relative;
-    height: 50%;
+    height: 100%;
     cursor: pointer;
 
     &:hover {
@@ -237,17 +235,22 @@ const BookWrapper = styled.div`
 const HoverText = styled.div`
     position: absolute;
     opacity: 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 50%;
+    left: 20%;
+
+    width: 50%;
+    height: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: opacity 0.3s;
+    border-radius: 10%;
+
+    color: white;
+    background-color: ${({theme}) => theme.colors.buttonColor};
 
     ${BookWrapper}:hover & {
-        opacity: 0.9;
+        opacity: 1;
     }
 `
 
@@ -299,8 +302,7 @@ const customStyles = {
         backgroundColor: 'white',
         display: 'flex',
         gap: '5%',
-        // justifyContent: 'center',
-        // alignItems: 'center',
+
         color: 'black',
 
         padding: '5%',

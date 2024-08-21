@@ -67,11 +67,13 @@ export default function MyInfo() {
                 {IngBook.map((book) => (
                     <BookDiv onClick={() => handleView(book.title, book.requestId.isbn)} key={book?.isbn}>
                         <BookImg src={book?.cover} alt={book?.title} />
-                        <BookTitle>{book?.title}</BookTitle>
-                        <BookAuthor>{book?.author}</BookAuthor>
-                        <ProgressText color={getProgressColor(book?.progress)}>
-                            {getProgressText(book?.progress)}
-                        </ProgressText>
+                        <BookContent>
+                            <BookTitle>{book?.title}</BookTitle>
+                            <BookAuthor>{book?.author}</BookAuthor>
+                            <ProgressText color={getProgressColor(book?.progress)}>
+                                {getProgressText(book?.progress)}
+                            </ProgressText>
+                        </BookContent>
                     </BookDiv>
                 ))}
             </BookWrapper>
@@ -81,11 +83,13 @@ export default function MyInfo() {
                 {IngBook.map((book: Book) => (
                     <BookDiv key={book?.isbn}>
                         <BookImg src={book?.cover} alt={book?.title} />
-                        <BookTitle>{book?.title}</BookTitle>
-                        <BookAuthor>{book?.author}</BookAuthor>
-                        <ProgressText color={getProgressColor(book?.progress)}>
-                            {getProgressText(book?.progress)}
-                        </ProgressText>
+                        <BookContent>
+                            <BookTitle>{book?.title}</BookTitle>
+                            <BookAuthor>{book?.author}</BookAuthor>
+                            <ProgressText color={getProgressColor(book?.progress)}>
+                                {getProgressText(book?.progress)}
+                            </ProgressText>
+                        </BookContent>
                     </BookDiv>
                 ))}
             </BookWrapper>
@@ -101,7 +105,9 @@ const Container = styled.main`
     display: flex;
     flex-direction: column;
     gap: 5%;
-    overflow-y: auto; /* Enable vertical scrolling */
+
+    overflow-y: auto;
+    scrollbar-width: none;
 `
 
 const BookImg = styled.img`
@@ -110,22 +116,28 @@ const BookImg = styled.img`
 
 const BookWrapper = styled.div`
     display: flex;
-    height: 100%;
+    flex-wrap: wrap;
     width: 100%;
-    flex: 0.5;
     gap: 5%;
+    row-gap: 20px;
 `
 
 const BookDiv = styled.div`
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 15%;
     gap: 2%;
 
     &:hover {
         cursor: pointer;
         opacity: 0.9;
     }
+`
+
+const BookContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 `
 
 const Title = styled.h1`
@@ -142,8 +154,10 @@ const BookTitle = styled.h2`
 
 const BookAuthor = styled.p`
     color: gray;
+    font-size: 13px;
 `
 
 const ProgressText = styled.p`
     color: ${(props) => props.color};
+    font-size: 13px;
 `

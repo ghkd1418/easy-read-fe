@@ -2,13 +2,34 @@ import styled from 'styled-components'
 import Modal from 'react-modal'
 import {useModal} from 'features/simplification/lib/useModal.ts'
 import {Button} from 'features/simplification/ui/Button.tsx'
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import {Book} from 'features/search/useBookSearch.ts'
-import {useNavigate} from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 import customAxios from 'shared/customAxios.ts'
 
 export default function Library() {
     const {isModalOpen, closeModal, openModal} = useModal()
+
+    const location = useLocation()
+
+    const section1Ref = useRef<HTMLDivElement>(null)
+    const section2Ref = useRef<HTMLDivElement>(null)
+    const section3Ref = useRef<HTMLDivElement>(null)
+    // 해시값에 따라 해당 섹션으로 스크롤하는 함수
+    const scrollToSection = (hash: string) => {
+        const sectionRefs = {
+            '#section0': section1Ref,
+            '#section1': section2Ref,
+            '#section2': section3Ref,
+        }
+        sectionRefs[hash]?.current?.scrollIntoView({behavior: 'smooth'})
+    }
+
+    useEffect(() => {
+        if (location.hash) {
+            scrollToSection(location.hash)
+        }
+    }, [location])
     const handleClick = () => {
         openModal()
     }
@@ -46,7 +67,7 @@ export default function Library() {
 
     return (
         <Container>
-            <Title>새로 들어온 책</Title>
+            <Title ref={section1Ref}>새로 들어온 책</Title>
             <BookWrapper>
                 {IngBook.map((book) => (
                     <BookDiv onClick={() => handleView(book.isbn, book.title)} key={book?.isbn}>
@@ -56,7 +77,7 @@ export default function Library() {
                     </BookDiv>
                 ))}
             </BookWrapper>
-            <Title>인기 많은 책</Title>
+            <Title ref={section2Ref}>인기 많은 책</Title>
             <BookWrapper>
                 {IngBook1.map((book) => (
                     <BookDiv onClick={handleView} key={book?.isbn}>
@@ -66,7 +87,7 @@ export default function Library() {
                     </BookDiv>
                 ))}
             </BookWrapper>
-            <Title>다독이가 추천하는 리스트</Title>
+            <Title ref={section3Ref}>다독이가 추천하는 리스트</Title>
             <BookWrapper>
                 {IngBook2.map((book) => (
                     <BookDiv onClick={handleView} key={book?.isbn}>
@@ -101,48 +122,8 @@ const Container = styled.div`
     padding: 6% 6%;
     border: 5px solid #f3f3f3;
     height: 406px;
-    overflow-y: scroll;
-`
-
-const TextAreaContainer = styled.section`
-    display: flex;
-    gap: 10%;
-    height: 100%;
-    flex-wrap: wrap;
-    position: relative;
-`
-
-const BookContainer = styled.div`
-    position: relative;
-    height: 50%;
-    cursor: pointer;
-
-    &:hover {
-        opacity: 0.7;
-    }
-`
-
-// const BookImg = styled.img`
-//     height: 100%;
-//     width: 100%;
-//     display: block;
-// `
-
-const HoverText = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s;
-
-    ${BookContainer}:hover & {
-        opacity: 0.9;
-    }
+    overflow-y: auto;
+    scrollbar-width: none;
 `
 
 const ModalContent = styled.div`
@@ -205,17 +186,18 @@ const BookImg = styled.img`
 
 const BookWrapper = styled.div`
     display: flex;
-    height: 100%;
+    flex-wrap: wrap;
     width: 100%;
-    flex: 0.5;
+
     gap: 5%;
+    row-gap: 20px;
 `
 
 const BookDiv = styled.div`
     display: flex;
     flex-direction: column;
-    width: 30%;
-    gap: 2%;
+    width: 15%;
+    gap: 5px;
 
     &:hover {
         cursor: pointer;
